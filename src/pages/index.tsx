@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
+import { useEffect, useState } from "react";
+import UserCollection from "../backend/db/UserCollection";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
 import User from "../core/User";
+import UserRepo from "../core/UserRepo";
 
 const Home = () => {
 
+	const userRepo: UserRepo = new UserCollection();
+	
 	const [mode, setMode] = useState<'table' | 'form'>('table');
-	const [user, setUser] = useState(User.empty());
-
-	const users = [
-		new User("Yuri", 21, "1"),
-		new User("Kamilla", 20, "2"),
-		new User("Heitor", 21, "3"),
-		new User("Guilherme", 20, "4"),
-		new User("Alice", 39, "5"),
-	];
+	const [user, setUser] = useState<User>(User.empty());
+	const [users, setUsers] = useState<User[]>([]);
+	
+	useEffect(() => {
+		getAll();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+	
+	const getAll = () => {
+		userRepo.getAll().then((users) => {
+			setUsers(users);
+			setMode('table');
+		});
+	}
 
 	const selectUser = (user: User) => {
 		setUser(user);
@@ -24,12 +34,14 @@ const Home = () => {
 
 	}
 
-	const deleteUser = (user: User) => {
-		console.log("Excluir " + user.name);
+	const deleteUser = async (user: User) => { 
+		await userRepo.delete(user);
+		getAll();
 	}
 
-	const saveUser = (user: User) => {
-		console.log(user);
+	const saveUser = async (user: User) => {
+		await userRepo.save(user);
+		getAll();
 		setMode('table');
 	}
 
@@ -52,11 +64,17 @@ const Home = () => {
 								Novo usuário
 							</Button>
 						</div>
-						<Table
-							users={users}
-							selectUser={selectUser}
-							deleteUser={deleteUser}
-						/>
+						{users.length ? (
+							<Table
+								users={users}
+								selectUser={selectUser}
+								deleteUser={deleteUser}
+							/>
+						) : (
+							<h1>
+								Não há usuários cadastrados.
+							</h1>
+						)}
 					</>
 				) : (
 					<Form
