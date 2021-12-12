@@ -1,16 +1,16 @@
-import Client from '../core/Client';
+import User from '../core/User';
 import { EditIcon, TrashIcon } from './Icons';
 
 interface TableProps {
-    clients: Client[];
-    selectClient?: (cliente: Client) => void
-    deleteClient?: (cliente: Client) => void
+    users: User[];
+    selectUser?: (user: User) => void
+    deleteUser?: (user: User) => void
 }
 
 
-const Table = ({ clients, selectClient, deleteClient }: TableProps) => {
+const Table = ({ users, selectUser, deleteUser }: TableProps) => {
 
-    const showActions = selectClient || deleteClient;
+    const showActions = selectUser || deleteUser;
 
     const renderHeader = () => {
         return (
@@ -26,46 +26,46 @@ const Table = ({ clients, selectClient, deleteClient }: TableProps) => {
     }
 
     const renderData = () => {
-        return clients?.map((client, i) => {
+        return users?.map((user, i) => {
             return (
                 <tr
-                    key={client.id}
+                    key={user.id}
                     className={`${i % 2 == 0 ? 'bg-blue-200' : 'bg-blue-100'}`}
                 >
-                    <td className='text-left p-3'>{client.id}</td>
-                    <td className='text-left p-3'>{client.name}</td>
-                    <td className='text-left p-3'>{client.age}</td>
+                    <td className='text-left p-3'>{user.id}</td>
+                    <td className='text-left p-3'>{user.name}</td>
+                    <td className='text-left p-3'>{user.age}</td>
                     {showActions ? (
-                        renderActions(client)
+                        renderActions(user)
                     ) : false}
                 </tr>
             )
         })
     }
 
-    const renderActions = (client: Client) => {
+    const renderActions = (user: User) => {
         return (
             <td className='flex justify-center items-center'>
-                {selectClient ? (
+                {selectUser ? (
                     <button
                         className={`
                             text-green-500 rounded-full
                             hover:bg-green-100
                             p-2 m-1
                         `}
-                        onClick={ _ => {selectClient?.(client)}}
+                        onClick={ _ => {selectUser?.(user)}}
                     >
                         {EditIcon}
                     </button>
                 ) : false}
-                {deleteClient ? (
+                {deleteUser ? (
                     <button 
                         className={`
                             text-red-500 rounded-full
                             hover:bg-red-100
                             p-2 m-1
                         `}
-                        onClick={ _ => {deleteClient?.(client)}}
+                        onClick={ _ => {deleteUser?.(user)}}
                     >
                         {TrashIcon}
                     </button>

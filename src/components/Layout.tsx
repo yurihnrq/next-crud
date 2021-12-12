@@ -14,7 +14,7 @@ const Layout = ({title, children}: LayoutProps) => {
             bg-white text-gray-700 rounded-md
         `}>
             <Title text={title}/>
-            <main className="p-4 text-2xl">
+            <main className="p-7 text-2xl">
                 {children}
             </main>
         </div>
