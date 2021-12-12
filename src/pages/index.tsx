@@ -1,54 +1,29 @@
-import { responseSymbol } from "next/dist/server/web/spec-compliant/fetch-event";
-import { useEffect, useState } from "react";
-import UserCollection from "../backend/db/UserCollection";
+import { useEffect } from "react";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
 import Table from "../components/Table";
-import User from "../core/User";
-import UserRepo from "../core/UserRepo";
+import useUsers from "../hooks/useUsers";
 
 const Home = () => {
 
-	const userRepo: UserRepo = new UserCollection();
-	
-	const [mode, setMode] = useState<'table' | 'form'>('table');
-	const [user, setUser] = useState<User>(User.empty());
-	const [users, setUsers] = useState<User[]>([]);
-	
-	useEffect(() => {
-		getAll();
+	const { 
+		user,
+		users,
+		tableVisible,
+		selectUser,
+		saveUser,
+		deleteUser,
+		newUser,
+		getAllUsers,
+		showTable,
+	} = useUsers();
+
+
+	useEffect( () => {
+		getAllUsers();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
-	
-	const getAll = () => {
-		userRepo.getAll().then((users) => {
-			setUsers(users);
-			setMode('table');
-		});
-	}
-
-	const selectUser = (user: User) => {
-		setUser(user);
-		setMode('form');
-
-	}
-
-	const deleteUser = async (user: User) => { 
-		await userRepo.delete(user);
-		getAll();
-	}
-
-	const saveUser = async (user: User) => {
-		await userRepo.save(user);
-		getAll();
-		setMode('table');
-	}
-
-	const newUser = () => {
-		setUser(User.empty());
-		setMode('form');
-	}
 
 	return (
 		<div className={`
@@ -57,7 +32,7 @@ const Home = () => {
 			text-white
 		`}>
 			<Layout title="CRUD simples">
-				{mode === 'table' ? (
+				{tableVisible ? (
 					<>
 						<div className="flex justify-end items-center">
 							<Button className="mb-3" color="green" onClick={newUser} >
@@ -78,7 +53,7 @@ const Home = () => {
 					</>
 				) : (
 					<Form
-						user={user} cancel={() => { setMode('table') }}
+						user={user} cancel={() => { showTable() }}
 						save={saveUser}
 					/>
 				)}
