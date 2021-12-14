@@ -30,7 +30,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
             return (
                 <tr
                     key={user.id}
-                    className={`${i % 2 == 0 ? 'bg-blue-200 dark:bg-blue-500' : 'bg-blue-100 dark:bg-blue-800'}`}
+                    className={`${i % 2 == 0 ? 'bg-blue-200 dark:bg-blue-500' : 'bg-blue-100 dark:bg-blue-600'}`}
                 >
                     <td className='text-left p-3'>{user.id}</td>
                     <td className='text-left p-3'>{user.name}</td>
@@ -54,20 +54,20 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
                             dark:hover:bg-green-700
                             p-2 m-1
                         `}
-                        onClick={ _ => {selectUser?.(user)}}
+                        onClick={_ => { selectUser?.(user) }}
                     >
                         {EditIcon}
                     </button>
                 ) : false}
                 {deleteUser ? (
-                    <button 
+                    <button
                         className={`
                             text-red-500 rounded-full
                             hover:bg-red-100
                             dark:hover:bg-red-700
                             p-2 m-1
                         `}
-                        onClick={ _ => {deleteUser?.(user)}}
+                        onClick={_ => { deleteUser?.(user) }}
                     >
                         {TrashIcon}
                     </button>
@@ -77,18 +77,20 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
     }
 
     return (
-        <table className='w-full rounded-xl overflow-hidden'>
-            <thead className={`
+        <div className='overflow-auto rounded-xl w-full'>
+            <table className='w-full overflow-hidden'>
+                <thead className={`
                 text-white
                 bg-gradient-to-r from-blue-500 to-blue-600
-                dark:from-blue-700 dark:to-blue-800 dark:text-gray-300
+                dark:from-blue-800 dark:to-blue-900 dark:text-gray-300
             `}>
-                {renderHeader()}
-            </thead>
-            <tbody>
-                {renderData()}
-            </tbody>
-        </table>
+                    {renderHeader()}
+                </thead>
+                <tbody>
+                    {renderData()}
+                </tbody>
+            </table>
+        </div>
     )
 }
 

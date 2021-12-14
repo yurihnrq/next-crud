@@ -9,9 +9,7 @@ export default class User {
         this.#age  = age;
     }
 
-    static empty() {
-        return new User("", 0,);
-    }
+    static empty() { return new User("", 0,); }
 
     get id() { return this.#id; }
 

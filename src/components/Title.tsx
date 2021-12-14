@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import useTheme from "../hooks/useTheme";
 import Button from "./Button";
 
 interface TitleProps {
@@ -7,30 +7,7 @@ interface TitleProps {
 
 const Title = ({ text }: TitleProps) => {
 
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
-
-    useEffect(() => {
-        if (window) {
-            if (localStorage.getItem('theme') === 'dark')
-                setTheme('dark');
-            else
-                setTheme('light');
-        }
-    }, []);
-
-    useEffect(() => {
-        const root = document.querySelector('html');
-
-        if (window) {
-            if (theme === 'dark') {
-                localStorage.setItem('theme', 'dark');
-                root.classList.add('dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-                root.classList.remove('dark');
-            }
-        }
-    }, [theme]);
+    const[ theme, setTheme ] = useTheme();
 
     return (
         <div className="flex flex-col">
@@ -39,10 +16,7 @@ const Title = ({ text }: TitleProps) => {
                     {text}
                 </h1>
                 <Button className="text-xl" onClick={() => {
-                    if (theme === 'light')
-                        setTheme('dark');
-                    else
-                        setTheme('light');
+                    theme === 'light' ? setTheme('dark') : setTheme('light');
                 }}>
                     Change to {theme === 'dark' ? 'light' : 'dark'} mode
                 </Button>
