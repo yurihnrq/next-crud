@@ -30,7 +30,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
             return (
                 <tr
                     key={user.id}
-                    className={`${i % 2 == 0 ? 'bg-blue-200' : 'bg-blue-100'}`}
+                    className={`${i % 2 == 0 ? 'bg-blue-200 dark:bg-blue-500' : 'bg-blue-100 dark:bg-blue-800'}`}
                 >
                     <td className='text-left p-3'>{user.id}</td>
                     <td className='text-left p-3'>{user.name}</td>
@@ -51,6 +51,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
                         className={`
                             text-green-500 rounded-full
                             hover:bg-green-100
+                            dark:hover:bg-green-700
                             p-2 m-1
                         `}
                         onClick={ _ => {selectUser?.(user)}}
@@ -63,6 +64,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
                         className={`
                             text-red-500 rounded-full
                             hover:bg-red-100
+                            dark:hover:bg-red-700
                             p-2 m-1
                         `}
                         onClick={ _ => {deleteUser?.(user)}}
@@ -79,6 +81,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
             <thead className={`
                 text-white
                 bg-gradient-to-r from-blue-500 to-blue-600
+                dark:from-blue-700 dark:to-blue-800 dark:text-gray-300
             `}>
                 {renderHeader()}
             </thead>

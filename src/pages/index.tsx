@@ -27,9 +27,9 @@ const Home = () => {
 
 	return (
 		<div className={`
-			flex justify-center items-center h-screen
-			bg-gradient-to-r from-red-400 to bg-purple-400
-			text-white
+			flex justify-center items-center h-screen text-white
+			bg-gradient-to-r from-red-400 to-purple-400
+			dark:from-blue-900 dark:to-gray-700 
 		`}>
 			<Layout title="CRUD simples">
 				{tableVisible ? (

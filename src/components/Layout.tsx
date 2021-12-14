@@ -7,13 +7,15 @@ interface LayoutProps {
     children: any
 }
 
-const Layout = ({title, children}: LayoutProps) => {
+const Layout = ({ title, children }: LayoutProps) => {
+
     return (
         <div className={`
             flex flex-col w-2/3
             bg-white text-gray-700 rounded-md
+            dark:bg-gray-700 dark:text-gray-300
         `}>
-            <Title text={title}/>
+            <Title text={title} />
             <main className="p-7 text-2xl">
                 {children}
             </main>

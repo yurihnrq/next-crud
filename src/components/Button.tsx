@@ -16,6 +16,7 @@ const Button = ({ children, color, className, onClick }: ButtonProps) => {
             className={`
                 bg-gradient-to-r from-${buttonColor}-400 to-${buttonColor}-500
                 text-white px-3 py-2 rounded-md
+                dark:text-gray-200 dark:from-${buttonColor}-700 dark:to-${buttonColor}-800
                 ${className}
             `}
             onClick={onClick}
