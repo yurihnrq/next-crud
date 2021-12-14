@@ -11,7 +11,7 @@ const Layout = ({ title, children }: LayoutProps) => {
 
     return (
         <div className={`
-            flex flex-col w-2/3
+            flex flex-col w-full md:w-2/3 h-full md:h-auto
             bg-white text-gray-700 rounded-md
             dark:bg-gray-700 dark:text-gray-300
         `}>

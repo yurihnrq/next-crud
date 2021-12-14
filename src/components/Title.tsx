@@ -11,8 +11,8 @@ const Title = ({ text }: TitleProps) => {
 
     return (
         <div className="flex flex-col">
-            <div className="flex flex-row px-7 py-3 justify-between">
-                <h1 className="text-4xl">
+            <div className="flex flex-row flex-wrap px-7 py-3 justify-between">
+                <h1 className="text-4xl mb-3 md:m-auto">
                     {text}
                 </h1>
                 <Button className="text-xl" onClick={() => {
