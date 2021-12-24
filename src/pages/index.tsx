@@ -53,13 +53,13 @@ const Home = () => {
 					</>
 				) : (
 					<Form
-						user={user} cancel={() => { showTable() }}
+						user={user} cancel={() => { showTable(); }}
 						save={saveUser}
 					/>
 				)}
 			</Layout>
 		</div>
-	)
+	);
 };
 
 export default Home;
