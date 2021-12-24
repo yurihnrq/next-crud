@@ -15,7 +15,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
 	const renderHeader = () => {
 		return (
 			<tr>
-				<th className='text-left p-3'>Código</th>
+				<th className='text-left p-3 hidden md:table-cell'>Código</th>
 				<th className='text-left p-3'>Nome</th>
 				<th className='text-left p-3'>Idade</th>
 				{showActions ? (
@@ -32,7 +32,7 @@ const Table = ({ users, selectUser, deleteUser }: TableProps) => {
 					key={user.id}
 					className={`${i % 2 == 0 ? "bg-blue-200 dark:bg-blue-500" : "bg-blue-100 dark:bg-blue-600"}`}
 				>
-					<td className='text-left p-3'>{user.id}</td>
+					<td className='text-left p-3 hidden md:table-cell'>{user.id}</td>
 					<td className='text-left p-3'>{user.name}</td>
 					<td className='text-left p-3'>{user.age}</td>
 					{showActions ? (
