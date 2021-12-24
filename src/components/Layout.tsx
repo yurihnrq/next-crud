@@ -8,7 +8,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ title, children }: LayoutProps) => {
-
+	
 	return (
 		<div className={`
             flex flex-col w-full md:w-2/3 h-full md:h-auto

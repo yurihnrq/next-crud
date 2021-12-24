@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Button from "../components/Button";
 import Form from "../components/Form";
 import Layout from "../components/Layout";
+import Loading from "../components/Loading";
 import Table from "../components/Table";
 import useUsers from "../hooks/useUsers";
 
@@ -38,9 +39,7 @@ const Home = () => {
 				{tableVisible ? (
 					<>
 						{load ? (
-							<div className="w-100 flex justify-center">
-								<div className="w-10 h-10 border-4 border-blue-300 rounded-full border-r-blue-500 animate-spin"></div>
-							</div>
+							<Loading />
 						) : (
 							<>
 								<div className="flex justify-end items-center">
