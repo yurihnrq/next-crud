@@ -9,6 +9,7 @@ const useUsers = () => {
 
 	const [user, setUser] = useState<User>(User.empty());
 	const [users, setUsers] = useState<User[]>([]);
+	const [load, setLoad] = useState<boolean>(true);
 
 	const {
 		showForm,
@@ -21,6 +22,7 @@ const useUsers = () => {
 		userRepo.getAll().then((users) => {
 			setUsers(users);
 			showTable();
+			setLoad(false);
 		});
 	};
 
@@ -56,7 +58,9 @@ const useUsers = () => {
 		getAllUsers,
 		formVisible,
 		tableVisible,
-		showTable
+		showTable,
+		load,
+		setLoad
 	};
 };
 
